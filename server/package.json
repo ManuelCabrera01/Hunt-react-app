@@ -6,7 +6,7 @@
     "client-install": "npm install --prefix client",
     "start": "node ./bin/www",
     "server": "DEBUG=server:* nodemon ./bin/www",
-    "client": "npm start cd client && npm start",
+    "client": "npm start cd client && ",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
