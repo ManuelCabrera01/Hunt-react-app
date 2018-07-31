@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AppNavBar from "./components/AppNavBar";
-import JobList from "./components/JobList";
+import NoteList from "./components/NoteList";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -13,7 +13,7 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
           <AppNavBar />
-          <JobList />
+          <NoteList />
         </div>
       </Provider>
     );

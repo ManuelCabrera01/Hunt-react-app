@@ -26,23 +26,13 @@ class AppNavBar extends Component {
       <div>
         <Navbar color="dark" dark expand="sm" className="mb-5">
           <Container>
-            <NavbarBrand href="/"> Job_Hunting </NavbarBrand>
+            <NavbarBrand href="/"> created yuo r own notes</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
                   <NavLink href="https://github.com/ManuelCabrera01/Hunt-react-app">
                     This Project Repo
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="https://github.com/ManuelCabrera01/Hunt-react-app">
-                    LinkedIn
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="https://github.com/ManuelCabrera01/Hunt-react-app">
-                    Indeed
                   </NavLink>
                 </NavItem>
               </Nav>

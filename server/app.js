@@ -53,17 +53,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
 // default value for title local
-app.locals.title = "+++JOB+++";
+app.locals.title = " NOTES";
 
-//routing
-const index = require("./routes/api/index");
-app.use("/", index);
-
-const jobsRoutes = require("./routes/api/jobsRoute");
-app.use("/api", jobsRoutes);
-
-const contasctsRoutes = require("./routes/api/contactsRoute");
-app.use("/api", contasctsRoutes);
+// //routing
+// const index = require("./routes/api/index");
+// app.use("/", index);
 
 const notesRoutes = require("./routes/api/notesRoute");
 app.use("/api", notesRoutes);

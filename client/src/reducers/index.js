@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import jobReducer from "./jobReducer";
+import noteReducer from "./noteReducer";
 
 export default combineReducers({
-  job: jobReducer
+  note: noteReducer
 });

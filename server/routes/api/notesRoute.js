@@ -1,31 +1,49 @@
 const express = require("express");
 const router = express.Router();
-const Jobs = require("../../models/job");
+const Notes = require("../../models/notes");
 
-router.post("/jobs/:id/notes/create", (req, res, next) => {
-  Jobs.findByIdAndUpdate(req.params.id, { $push: { notes: req.body } })
+// DISPLAY YOUR LIST OF noteS
+router.get("/notes", (req, res, next) => {
+  Notes.find()
+    .sort({ date: -1 })
+    .then(allTheNotes => {
+      res.json(allTheNotes);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+//SINGLEnote POPULATED WITH ITS OWN CONTACTS
 
-    .then(theJob => {
-      res.json(theJob.notes);
+router.get("/notes/:id", (req, res, next) => {
+  const id = req.params.id;
+  Notes.findById(id)
+    .then(theNote => {
+      res.send({ theNote: theNote });
     })
     .catch(err => {
       next(err);
     });
 });
-router.post("/jobs/:id/notes/delete/:noteIndex", (req, res, next) => {
-  const jobID = req.params.id;
-  const noteIndex = req.params.noteIndex;
-  Jobs.findById(jobID)
-    .then(theJob => {
-      theJob.notes.splice(noteIndex, 1);
-      theJob
-        .save()
-        .then(x => {
-          res.json(theJob);
-        })
-        .catch(err => {
-          next(err);
-        });
+
+// CREATED A SINGLE note
+router.post("/notes/create", (req, res, next) => {
+  const { name, date } = req.body;
+  const newNote = new Notes({ name, date });
+  newNote
+    .save()
+    .then(response => {
+      res.json(response);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
+router.post("/notes/:id/delete", (req, res, next) => {
+  Notes.findByIdAndRemove(req.params.id)
+    .then(reponse => {
+      res.json({ sucees: true });
     })
     .catch(err => {
       next(err);

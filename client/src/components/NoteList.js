@@ -3,35 +3,35 @@ import { Container, ListGroup, ListGroupItem, Button } from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import uuid from "uuid";
 import { connect } from "react-redux";
-import { getJobs } from "../actions/JobActions";
+import { getNotes } from "../actions/NoteActions";
 import PropTypes from "prop-types";
 
-class JobList extends Component {
+class NoteList extends Component {
   componentDidMount() {
-    this.props.getJobs();
+    this.props.getNotes();
   }
 
   render() {
-    const { jobs } = this.props.job;
+    const { notes } = this.props.note;
     return (
       <Container>
         <Button
           color="dark"
           style={{ marginBottom: "2rem" }}
           onClick={() => {
-            const name = prompt("Enter job");
+            const name = prompt("Enter note");
             if (name) {
               this.setState(state => ({
-                jobs: [...state.jobs, { id: uuid(), name }]
+                notes: [...state.notes, { id: uuid(), name }]
               }));
             }
           }}
         >
-          Add Job
+          Add Note
         </Button>
         <ListGroup>
           <TransitionGroup>
-            {jobs.map(({ id, name }) => (
+            {notes.map(({ id, name }) => (
               <CSSTransition key={id} timeout={500} classNames={"fade"}>
                 <ListGroupItem>
                   <Button
@@ -40,7 +40,7 @@ class JobList extends Component {
                     size="sm"
                     onClick={() => {
                       this.setState(state => ({
-                        jobs: state.jobs.filter(job => job.id !== id)
+                        notes: state.notes.filter(note => note.id !== id)
                       }));
                     }}
                   >
@@ -57,15 +57,15 @@ class JobList extends Component {
   }
 }
 
-JobList.propType = {
-  getJobs: PropTypes.func.inRequire,
+NoteList.propType = {
+  getNotes: PropTypes.func.inRequire,
   item: PropTypes.object.inRequire
 };
 
 const mapStateToProps = state => ({
-  job: state.job
+  note: state.note
 });
 export default connect(
   mapStateToProps,
-  { getJobs }
-)(JobList);
+  { getNotes }
+)(NoteList);
