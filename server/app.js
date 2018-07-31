@@ -9,12 +9,12 @@ const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
 const cors = require("cors");
-
+const db = require("./config/keys").mongoURI;
 mongoose.Promise = Promise;
 mongoose
   .connect(
-    "mongodb://localhost/server",
-    { useMongoClient: true }
+    db
+    // { useMongoClient: true }
   )
   .then(() => {
     console.log("Connected to Mongo!");
@@ -56,16 +56,16 @@ app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 app.locals.title = "+++JOB+++";
 
 //routing
-const index = require("./routes/index");
+const index = require("./routes/api/index");
 app.use("/", index);
 
-const jobsRoutes = require("./routes/jobsRoute");
-app.use("/", jobsRoutes);
+const jobsRoutes = require("./routes/api/jobsRoute");
+app.use("/api", jobsRoutes);
 
-const contasctsRoutes = require("./routes/contactsRoute");
-app.use("/", contasctsRoutes);
+const contasctsRoutes = require("./routes/api/contactsRoute");
+app.use("/api", contasctsRoutes);
 
-const notesRoutes = require("./routes/notesRoute");
-app.use("/", notesRoutes);
+const notesRoutes = require("./routes/api/notesRoute");
+app.use("/api", notesRoutes);
 
 module.exports = app;

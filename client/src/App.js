@@ -1,8 +1,13 @@
 import React, { Component } from "react";
+import AppNavBar from "./components/AppNavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 class App extends Component {
   render() {
-    return <div>HELLO</div>;
+    return (
+      <div className="App">
+        <AppNavBar />
+      </div>
+    );
   }
 }
 

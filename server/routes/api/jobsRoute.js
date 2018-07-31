@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const Jobs = require("../models/job");
+const Jobs = require("../../models/job");
 
 // DISPLAY YOUR LIST OF JOBS
 router.get("/jobs", (req, res, next) => {
   Jobs.find()
+    .sort({ date: -1 })
     // UNCOMMENTS this two dude after you create your  notes and contatcs
     // .populate(notes)
     // .populate(Conatacts)
@@ -77,14 +78,11 @@ router.post("/jobs/:id/update", (req, res, next) => {
 router.post("/jobs/:id/delete", (req, res, next) => {
   Jobs.findByIdAndRemove(req.params.id)
     .then(reponse => {
-      res.json();
+      res.json({ sucees: true });
     })
     .catch(err => {
       next(err);
     });
 });
-
-// this is what theBook looks like
-// {title: 'animal farm', description: 'lorem ipsum dolor', reviews: [{}, {}, {}]     }
 
 module.exports = router;

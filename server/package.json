@@ -6,11 +6,12 @@
     "client-install": "npm install --prefix client",
     "start": "node ./bin/www",
     "server": "DEBUG=server:* nodemon ./bin/www",
-    "client": "npm start cd client && ",
+    "client": "npm start --prefix client ",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
     "body-parser": "~1.18.2",
+    "concurrently": "^3.6.1",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",
     "dotenv": "~4.0.0",

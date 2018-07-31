@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Jobs = require("../models/job");
+const Jobs = require("../../models/job");
 
 router.post("/jobs/:id/contacts/create", (req, res, next) => {
   Jobs.findByIdAndUpdate(req.params.id, { $push: { contacts: req.body } })
