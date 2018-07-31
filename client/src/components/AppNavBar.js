@@ -35,6 +35,16 @@ class AppNavBar extends Component {
                     This Project Repo
                   </NavLink>
                 </NavItem>
+                <NavItem>
+                  <NavLink href="https://github.com/ManuelCabrera01/Hunt-react-app">
+                    LinkedIn
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="https://github.com/ManuelCabrera01/Hunt-react-app">
+                    Indeed
+                  </NavLink>
+                </NavItem>
               </Nav>
             </Collapse>
           </Container>

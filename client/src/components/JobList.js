@@ -1,45 +1,25 @@
 import React, { Component } from "react";
 import { Container, ListGroup, ListGroupItem, Button } from "reactstrap";
-import { cssTransition, TransitionDroup } from "react-transition-group";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import uuid from "uuid";
+import { connect } from "react-redux";
+import { getJobs } from "../actions/JobActions";
+import PropTypes from "prop-types";
+
 class JobList extends Component {
-  state = {
-    jobs: [
-      {
-        id: uuid(),
-        name: "test1",
-        position: "test1",
-        phoneNum: "123456",
-        notes: [
-          {
-            content: "test1",
-            tittle: "test1"
-          }
-        ],
-        contacts: [
-          {
-            name: "test1",
-            company: "test1",
-            position: "test1",
-            phoneNum: "test1",
-            email: "test1",
-            touch: "test1",
-            comment: "test1"
-          }
-        ]
-      }
-    ]
-  };
+  componentDidMount() {
+    this.props.getJobs();
+  }
 
   render() {
-    const { jobs } = this.state;
+    const { jobs } = this.props.job;
     return (
       <Container>
         <Button
           color="dark"
           style={{ marginBottom: "2rem" }}
           onClick={() => {
-            const name = prompt("Enter info");
+            const name = prompt("Enter job");
             if (name) {
               this.setState(state => ({
                 jobs: [...state.jobs, { id: uuid(), name }]
@@ -50,9 +30,9 @@ class JobList extends Component {
           Add Job
         </Button>
         <ListGroup>
-          <transitionGroup>
+          <TransitionGroup>
             {jobs.map(({ id, name }) => (
-              <cssTransition Key={id} timeout={500} className={"fade"}>
+              <CSSTransition key={id} timeout={500} classNames={"fade"}>
                 <ListGroupItem>
                   <Button
                     className="remove-btn"
@@ -68,12 +48,24 @@ class JobList extends Component {
                   </Button>
                   {name}
                 </ListGroupItem>
-              </cssTransition>
+              </CSSTransition>
             ))}
-          </transitionGroup>
+          </TransitionGroup>
         </ListGroup>
       </Container>
     );
   }
 }
-export default JobList;
+
+JobList.propType = {
+  getJobs: PropTypes.func.inRequire,
+  item: PropTypes.object.inRequire
+};
+
+const mapStateToProps = state => ({
+  job: state.job
+});
+export default connect(
+  mapStateToProps,
+  { getJobs }
+)(JobList);
