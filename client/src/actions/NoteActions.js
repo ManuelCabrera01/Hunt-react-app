@@ -10,11 +10,11 @@ export const getNotes = () => dispatch => {
     })
   );
 };
-export const deleteNote = id => {
-  return {
-    type: DELETE_NOTE,
-    payload: id
-  };
+export const deleteNote = id =>dispatch=> {
+  axios.delete(`/api/notes${id}`).then(res=>dispatch({
+    type:DELETE_NOTE,
+    payload:id
+  }))
 };
 export const addNote = note => dispatch => {
   axios.post("/api/note", note).then(res =>
